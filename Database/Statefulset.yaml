@@ -1,0 +1,48 @@
+# https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  namespace: database-ns
+spec:
+  selector:
+    matchLabels:
+      app: db # has to match .spec.template.metadata.labels
+  serviceName: "db-svc"
+  replicas: 3 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: db # has to match .spec.selector.matchLabels
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        ports:
+        - containerPort: 3306
+        envFrom:
+            - secretRef:
+                name: db-secret
+            - configMapRef:
+                name: db-config
+        volumeMounts:
+        - name: db-data
+          mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+  - metadata:
+      name: db-data
+
+    spec:
+      accessModes:
+      - ReadWriteOnce
+
+      storageClassName: manual
+
+      resources:
+        requests:
+          storage: 1Gi
+  
+    
+
+ 
+

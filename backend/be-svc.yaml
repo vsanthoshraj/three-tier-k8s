@@ -1,0 +1,14 @@
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: "be-svc"
+  namespace: backend-ns
+spec:
+  selector:
+    app: backend
+  type: ClusterIP
+  ports:
+  - port: 5000
+    targetPort: 5000   #req send to db containerport
+  

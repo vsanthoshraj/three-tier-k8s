@@ -1,0 +1,13 @@
+# https://kubernetes.io/docs/concepts/configuration/configmap/
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-config
+  namespace: database-ns
+data:
+  DB_HOST: db-svc.database-ns.svc.cluster.local
+  DB_PORT: "3306" #containerport of db mysql
+  DB_NAME: myapp 
+  
+
+

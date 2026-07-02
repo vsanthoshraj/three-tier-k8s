@@ -1,0 +1,15 @@
+# https://kubernetes.io/docs/concepts/services-networking/service/
+apiVersion: v1
+kind: Service
+metadata:
+  name: "fe-svc"
+  namespace: frontend-ns
+spec:
+  selector:
+    app: frontend
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80   #req send to db containerport
+    nodePort: 30001
+  

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: frontend-ns
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: vsanthoshraj/k8s-frontend:v2
+        ports:
+        - containerPort: 80
+        env:
+          - name: URL
+            value: http://be-svc.backend-ns.svc.cluster.local:5000
