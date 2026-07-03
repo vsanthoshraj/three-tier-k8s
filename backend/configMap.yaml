@@ -5,8 +5,7 @@ metadata:
   name: be-config
   namespace: backend-ns
 data:
-  DB_HOST: db-svc.database-ns.svc.cluster.local
-  DB_PORT: "3306"
-  DB_NAME: myapp
-
+  MYSQL_HOST: db-svc.database-ns.svc.cluster.local
+  MYSQL_PORT: "3306"
+  MYSQL_DATABASE: myapp
 
